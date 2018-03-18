@@ -1,6 +1,6 @@
 from __future__ import print_function
 import os
-import urllib
+import urllib.request
 import random
 import numpy as np
 import gzip
@@ -16,7 +16,7 @@ def get_data(filename, directory,
         os.mkdir(directory)
     filepath = os.path.join(directory, filename)
     if not os.path.exists(filepath):
-        filepath, _ = urllib.urlretrieve(data_url + filename, filepath)
+        filepath, _ = urllib.request.urlretrieve(data_url + filename, filepath)
         statinfo = os.stat(filepath)
         if verbose:
             print('Succesfully downloaded', filename, statinfo.st_size, 'bytes.')
@@ -129,7 +129,7 @@ def main():
     train_unlabelled_data_labels = []
 
     for label, label_data in train_data_label_buckets.items():
-        count = n_labelled / num_labels
+        count = n_labelled // num_labels  # change / to // due to transfer from Py2 to Py3 
         for v in label_data[:count]:
             train_labelled_data_images.append(v[0])
             train_labelled_data_labels.append(v[1])

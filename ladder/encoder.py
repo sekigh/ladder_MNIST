@@ -45,6 +45,8 @@ class Encoder(torch.nn.Module):
             self.activation = torch.nn.ReLU()
         elif activation_type == 'softmax':
             self.activation = torch.nn.Softmax()
+        elif activation_type == 'sigmoid':        # Insert tanh to activation choice 
+            self.activation = torch.nn.Sigmoid()  # Insert tanh to activation choice 
         else:
             raise ValueError("invalid Acitvation type")
 
